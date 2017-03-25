@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Category</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link href="css/global.css" rel="stylesheet"/>
+    <link href="css/jquery.cluetip.css" rel="stylesheet"/>
+    <link href="css/scenes.css" rel="stylesheet"/>
+    <link href="css/jquery.autocomplete.css" rel="stylesheet"/>
+    <link href="css/jquery-ui.min.css" rel="stylesheet"/>
+
+
+</head>
+<body id="category">
+<p id="back-top"><a href="#top"><span></span></a></p>
+<div id="wrapper1">
+    <div id="wrapper2">
+        <div id="wrapper3">
+            <th:block th:include="fragments :: header">
+            </th:block>
+            <div id="columns">
+
+                <th:block th:include="fragments :: left_column">
+                </th:block>
+                <div id="center_column" class="center_column">
+                    <div class="breadcrumb bordercolor">
+                        <div class="breadcrumb_inner">
+                            <a href="/"
+                               title="return to Home" th:text="#{header.home}"></a><span class="navigation-pipe">&gt;</span><span
+                                id="navigation_page_last"
+                                class="navigation_page"></span></div>
+                    </div>
+                    <h1 id="title">
+                    </h1>
+
+                    <div class="product_sort">
+                        <ul class="product_view">
+                            <li id="product_view_grid"></li>
+                            <li id="product_view_list" class="current"></li>
+                        </ul>
+                    </div>
+
+                    <ul id="product_list" class="bordercolor list">
+                    </ul>
+
+                    <form id="more_book_div" class="product_compare button">
+                        <input id="more_books" class="button" th:value="#{more}"/>
+                    </form>
+                </div>
+
+                <div class="clearblock"></div>
+            </div>
+        </div>
+
+        <th:block th:include="fragments :: footer">
+        </th:block>
+    </div>
+</div>
+
+<script src="js/jquery-2.2.1.min.js"/>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/tools.js"/>
+<script src="js/ajax-cart.js"/>
+<script src="js/tree-management.js"/>
+<script src="js/jquery.autocomplete.js"/>
+<script src="js/cookies.js"/>
+<script src="js/script.js"/>
+<script src="js/jscript_xjquery.jqtransform.js"/>
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/my.js"></script>
+
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var categories = [[${categoryList}]];
+    var bookListDto = [[${bookListDto}]];
+    var categoryId = [[${categoryId}]];
+    var title = [[${title}]];
+    var currentChunk = 0;
+    var chunks = bookListDto.chunks;
+    var email = [[${email}]];
+    var userId = [[${userId}]];
+    var locale = [[${#locale}]].ISO3Language;
+    var welcomeMessage = [[#{welcome.message}]];
+    var login = [[#{log.in}]];
+    var logout = [[#{log.out}]];
+    var publisherMessage = [[#{publisher}]];
+    var languageMessage = [[#{language}]];
+    var yearMessage = [[#{year}]];
+    var authorsMessage = [[#{authors}]];
+    var find = [[#{find}]];
+    var messageEmpty = [[#{message.empty}]];
+
+    $(function () {
+        resolveLocale(locale)
+        initUserCred(email, userId, welcomeMessage, login, logout);
+        activateDatePicker();
+        initTitle(title, bookListDto.count, find)
+        initCategoriesForBooks(categories, categoryId)
+        initBookList()
+    });
+
+    $('#more_books').click(function () {
+        addBooksChunk()
+    });
+
+    function initBookList(){
+        if (bookListDto.count == 0) {
+            $('#product_list').append(emptyResult(messageEmpty, title));
+            $('#more_book_div').attr('class', 'product_compare button hidden');
+            $('#product_view_grid').attr('class', 'hidden');
+            $('#product_view_list').attr('class', 'hidden');
+        } else {
+            addBooksChunk()
+        }
+    }
+
+    function addBooksChunk() {
+        if (currentChunk < chunks.length) {
+            var bookList = chunks[currentChunk];
+            for (y = 0; y < bookList.length; y++) {
+                var additionalClass;
+                if ((y + 1) % 3 == 0 && (y + 1) / 3 != 0) {
+                    additionalClass = ' product_list-3'
+                } else {
+                    additionalClass = ''
+                }
+                var id = bookList[y].id;
+                var name = bookList[y].name;
+                var image = bookList[y].image;
+                var description = bookList[y].description;
+                var authorList = authors(bookList[y].author, authorsMessage);
+                var publisherId = bookList[y].publisher.id;
+                var publisherName = bookList[y].publisher.name;
+                var lang = bookList[y].language;
+                var year = bookList[y].year;
+                $("#product_list").append(
+                    book(additionalClass, id, name, image, description, authorList, publisherId, publisherName, lang, year,
+                        publisherMessage, languageMessage, yearMessage));
+            }
+            currentChunk++;
+            if (currentChunk == chunks.length) {
+                $('#more_book_div').attr('class', 'product_compare button hidden')
+            }
+        }
+    }
+    /*]]>*/
+</script>
+</body>
+</html>

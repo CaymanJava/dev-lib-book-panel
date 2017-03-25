@@ -1,0 +1,205 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="header">
+    <div id="header">
+        <a id="header_logo" href="/" title="Books">
+            <img class="logo" th:src="@{/images/logo.jpg}" alt="Books"/>
+        </a>
+        <div id="header_right">
+
+            <div id="languages_block_top">
+                <ul id="first-languages">
+                    <li id="lang_en">
+                        En
+                    </li>
+                    <li id="lang_ru">
+                        Ru
+                    </li>
+                </ul>
+            </div>
+
+            <div class="clearblock"></div>
+            <ul id="tmheaderlinks">
+                <li>
+                    <a href="/" id="main_page" th:text="#{header.home}"></a>
+                </li>
+                <li>
+                    <a href="about" id="about_page" th:text="#{header.about}"></a>
+                </li>
+                <li>
+                    <a href="contact" id="contact_page" th:text="#{header.contact}"></a>
+                </li>
+            </ul>
+            <div id="header_user">
+                <ul>
+                    <li id="header_user_info">
+                    </li>
+                    <li id="your_account"><a th:title="#{header.your.account}" th:text="#{header.your.account}"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="left_column">
+<div id="left_column" class="column">
+
+    <div id="search_block_left" class="block exclusive">
+        <h4>Search</h4>
+        <form method="post" action="search"
+              id="searchbox">
+            <p class="block_content">
+                <label for="search_query_block" th:text="#{enter.product.name}"></label>
+                <input class="search_query" type="text" id="search_query_block" name="keyword"
+                       value=""/>
+                <input type="submit" id="search_button" class="button_mini" value="go"/>
+            </p>
+        </form>
+    </div>
+
+    <div id="categories_block_left" class="block">
+        <h4 th:text="#{categories.title}"></h4>
+        <div class="block_content">
+            <ul id="category-list" class="tree dhtml">
+            </ul>
+        </div>
+    </div>
+
+    <div id="cart_block" class="block exclusive">
+        <h4 th:text="#{filter.title}"></h4>
+        <div class="block_content">
+            <ul>
+                <form method="post" action="filter" class="product_compare button">
+                    <br/>
+                    <li>
+                        <div class="row">
+                            <label for="lang_filter" class="filter-sign" th:text="#{language.title}"></label>
+                            <select id="lang_filter" name="language">
+                                <option value="" selected="selected"></option>
+                                <option value="EN">EN</option>
+                                <option value="RU">RU</option>
+                                <option value="PL">PL</option>
+                                <option value="UA">UA</option>
+                            </select>
+                        </div>
+                    </li>
+                    <br/>
+                    <li>
+                        <div class="row">
+                            <label for="category_filter" class="filter-sign" th:text="#{categories.single}"></label>
+                            <select id="category_filter" name="category">
+                                <option value="0" selected="selected"></option>
+                                <option th:each="category : ${categoryList}"
+                                        th:value="${category.id}"
+                                        th:text="${category.name}"></option>
+                            </select>
+                        </div>
+                    </li>
+                    <br/>
+                    <li>
+                        <label class="filter-sign" for="date_from" th:text="#{filter.from}"></label>
+                        <input value="1950" name="from_year" type="text" id="date_from" class="date-picker"
+                               autocomplete="off"/>
+                    </li>
+                    <br/>
+                    <li>
+                        <label class="filter-sign" for="date_to" th:text="#{filter.to}"></label>
+                        <input value="2100" name="to_year" type="text" id="date_to" class="date-picker"
+                               autocomplete="off"/>
+                    </li>
+                    <br/>
+                    <li>
+                        <input align="center" type="submit" class="button" th:value="#{filter.action}"/>
+                    </li>
+                </form>
+            </ul>
+            <span class="crn1"></span>
+            <span class="crn2"></span>
+        </div>
+        <div class="clearblock"></div>
+    </div>
+</div>
+</th:block>
+
+
+<th:block th:fragment="footer">
+    <div id="footer_wrapper">
+        <div id="footer">
+            <div id="tmfooterlinks">
+                <div>
+                    <h4 th:text="#{footer.info}"></h4>
+                    <ul>
+                        <li>
+                            <a href="contact" th:text="#{header.contact}"></a>
+                        </li>
+                        <!--<li><a href="https://livedemo00.template-help.com/prestashop_40228/sitemap.php">Sitemap</a>-->
+                        <!--</li>-->
+                        <!--<li><a href="https://livedemo00.template-help.com/prestashop_40228/cms.php?id_cms=2">Legal-->
+                            <!--Notice</a></li>-->
+                        <!--<li><a href="https://livedemo00.template-help.com/prestashop_40228/cms.php?id_cms=3">Terms-->
+                            <!--and conditions</a></li>-->
+                        <li><a href="about" th:text="#{header.about}"></a></li>
+                    </ul>
+                </div>
+                <!--<div>-->
+                    <!--<h4>Our offers</h4>-->
+                    <!--<ul>-->
+                        <!--<li><a href="https://livedemo00.template-help.com/prestashop_40228/new-products.php">New-->
+                            <!--products</a></li>-->
+                        <!--<li><a href="https://livedemo00.template-help.com/prestashop_40228/best-sales.php">Top-->
+                            <!--sellers</a></li>-->
+                        <!--<li>-->
+                            <!--<a href="https://livedemo00.template-help.com/prestashop_40228/prices-drop.php">Specials</a>-->
+                        <!--</li>-->
+                        <!--<li><a href="https://livedemo00.template-help.com/prestashop_40228/manufacturer.php">Manufacturers</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="https://livedemo00.template-help.com/prestashop_40228/supplier.php">Suppliers</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+                <div>
+                    <h4 th:text="#{header.your.account}"></h4>
+                    <ul>
+                        <li><a id="your_account_footer" th:text="#{header.your.account}"></a></li>
+                        <!--<li><a href="https://livedemo00.template-help.com/prestashop_40228/identity.php">Personal-->
+                            <!--information</a></li>-->
+                        <!--<li>-->
+                            <!--<a href="https://livedemo00.template-help.com/prestashop_40228/addresses.php">Addresses</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="https://livedemo00.template-help.com/prestashop_40228/discount.php">Discount</a>-->
+                        <!--</li>-->
+                        <!--<li><a href="https://livedemo00.template-help.com/prestashop_40228/history.php">Order-->
+                            <!--history</a></li>-->
+                    </ul>
+                </div>
+                <p>&copy; 2017 Powered by <a href="https://github.com/CaymanJava">Cayman</a>&trade;. All rights
+                    reserved :)</p>
+            </div>
+            <div id="tmsocial" class="block">
+                <h4 th:text="#{follow.us}"></h4>
+                <ul>
+                    <li><a target="_blank" href='https://facebook.com'><img
+                            th:src="@{/images/facebook.jpg}" alt="" title="- Facebook"/></a><span><a
+                            target="_blank" href='https://facebook.com'>- Facebook</a></span></li>
+                    <li><a target="_blank" href='https://twitter.com'><img
+                            th:src="@{/images/twitter.jpg}" alt="" title="- Twitter"/></a><span><a
+                            target="_blank" href='https://twitter.com'>- Twitter</a></span></li>
+                </ul>
+            </div>
+            <div id="tmtextblock">
+                <span class="txt1" th:text="#{footer.contact}"></span>
+                <span class="txt2">8901 Marmora Road, Glasgow,  D04 89GR</span>
+                <span class="txt3">+1 (234) 567-8901</span>
+            </div>
+
+            <!--<div id="tmtextblock1">-->
+                <!--<span class="txt1" th:text="#{footer.contact}"></span>-->
+                <!--<span class="txt2">8901 Marmora Road, Glasgow,  D04 89GR</span>-->
+                <!--<span class="txt3">+1 (234) 567-8901</span>-->
+            <!--</div>-->
+        </div>
+    </div>
+</th:block>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:fb="http://www.w3.org/1999/xhtml">
+<head>
+    <title id="book_title" th:text="${book.name}"></title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="css/global.css" rel="stylesheet"/>
+    <link href="css/jquery.fancybox-1.3.4.css" rel="stylesheet"/>
+    <link href="css/jquery.autocomplete.css" rel="stylesheet"/>
+    <link href="css/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="css/rating.min.css" rel="stylesheet"/>
+</head>
+<body id="product">
+<p id="back-top"><a href="#top"><span></span></a></p>
+<div id="wrapper1">
+    <div id="wrapper2">
+        <div id="wrapper3">
+            <th:block th:include="fragments :: header">
+            </th:block>
+            <div id="columns">
+                <th:block th:include="fragments :: left_column">
+                </th:block>
+
+                <div id="center_column" class="center_column">
+                    <div class="breadcrumb bordercolor">
+                        <div class="breadcrumb_inner">
+                            <a href="/"
+                               title="return to Home" th:text="#{header.home}"></a>
+                            <span class="navigation-pipe">&gt;</span><a th:href="@{category(id=${book.category.id})}"
+                                                                        th:text="${book.category.name}"></a>
+                            <span class="navigation-pipe">&gt;</span><a th:href="@{book(id=${book.id})}"
+                                                                        th:text="${book.name}"></a>
+                            <span id="navigation_page_last" class="navigation_page"></span>
+                        </div>
+                    </div>
+                    <div id="primary_block" class="clearfix">
+                        <div id="pb-right-column">
+                            <div id="image-block" class="bordercolor">
+                                <img th:src="${book.image}" th:title="${book.name}" th:alt="${book.name}"
+                                     id="bigpic" width="304" height="449"/>
+                            </div>
+
+                            <ul id="usefull_link_block" class="bordercolor">
+                                <li>
+                                    <a th:href="@{friend(id=${book.id})}" th:text="#{send.to.friend}"></a>
+                                </li>
+                                <li class="print"><a href="javascript:print();" th:text="#{print}"></a></li>
+                                <li class="view-size"><span id="view_full_size" class="span_link" th:text="#{maximize}"></span></li>
+                            </ul>
+                        </div>
+                        <div id="pb-left-column">
+                            <h1 th:text="${book.name}"></h1>
+                            <div id="buy_block" class="bordercolor">
+                                <div class="price bordercolor">
+                                    <span class="our_price_display">
+                                        <span id="averageRating" class="price"></span>
+                                    </span>
+                                    <span class="our_price_display">
+                                        <span id="votes_count" class="price votes"></span>
+                                    </span>
+                                    <div class="rating_stars">
+                                        <ul class="c-rating" id="el">
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="other_options bordercolor">
+                                    <div id="other_prices">
+                                        <p><span th:text="#{language} + ' '"></span><span th:text="${book.language}"></span></p>
+                                        <p><span th:text="#{year} + ' '"></span><span th:text="${book.year}"></span></p>
+                                        <p><span th:text="#{pages} + ' '"></span><span th:text="${book.pageCount}"></span></p>
+                                        <p><span th:text="#{views} + ' '"></span><span th:text="${book.views}"></span></p>
+                                        <p id="pQuantityAvailable">
+                                            <span id="quantityAvailable" th:text="#{publisher} + ' '"></span>
+                                            <a th:href="@{/publisher(id=${book.publisher.id})}"
+                                               th:text="${book.publisher.name}"></a>
+                                        </p>
+                                    </div>
+                                    <div id="attributes">
+                                        <div><a class="exclusive ajax_add_to_cart_button" id="download_button"
+                                                th:title="#{download}" th:text="#{download}"></a></div>
+                                        <div><a class="exclusive ajax_add_to_cart_button" id="open_button"
+                                                target="_blank" th:title="#{open}" th:text="#{open}"></a></div>
+                                    </div>
+                                    <div class="clearblock"></div>
+                                </div>
+                                <div id="short_description_block" class="bordercolor">
+                                    <div id="short_description_content" class="rte align_justify">
+                                    </div>
+                                    <p class="buttons_bottom_block"><a id="more_details" class="button" th:text="#{more.details}"></a></p>
+                                </div>
+
+                                <p id="oosHook" style="display: none;"></p>
+                                <div class="share bordercolor">
+                                    <div class="addthis_toolbox addthis_default_style ">
+                                        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                                        <a class="addthis_button_tweet"></a>
+                                        <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+                                        <a class="addthis_counter addthis_pill_style"></a>
+                                    </div>
+                                    <script type="text/javascript"
+                                            src="https://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f419f410efe76d3"></script>
+                                </div>
+                                <div class="clearblock"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="more_info_block" class="clear">
+                        <ul id="more_info_tabs" class="idTabs idTabsShort">
+                            <li><a id="more_info_tab_more_info" href="#idTab1" th:text="#{more.info}"></a></li>
+                            <li><a id="more_info_tab_data_sheet" href="#idTab2" th:text="#{comments}"></a></li>
+                            <li><a href="#idTab4" th:text="#{more.books}"></a></li>
+                        </ul>
+                        <div id="more_info_sheets" class="bgcolor bordercolor">
+                            <div id="idTab1">
+                                <div><p th:text="${book.description}"></p></div>
+                            </div>
+                            <ul id="idTab2" class="bullet">
+                                <div id="disqus_thread"></div>
+                            </ul>
+                            <ul id="idTab4">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearblock"></div>
+            </div>
+        </div>
+        <th:block th:include="fragments :: footer">
+        </th:block>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery-1.4.4.min.js"/>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"/>
+<script type="text/javascript" src="js/tools.js"/>
+<script type="text/javascript" src="js/jquery.fancybox-1.3.4.js"/>
+<script type="text/javascript" src="js/jquery.idTabs.modified.js"/>
+<script type="text/javascript" src="js/jquery.scrollTo-1.4.2-min.js"/>
+<script type="text/javascript" src="js/jquery.serialScroll-1.2.2-min.js"/>
+<script type="text/javascript" src="js/tools.js"/>
+<script type="text/javascript" src="js/product.js"/>
+<script type="text/javascript" src="js/ajax-cart.js"/>
+<script type="text/javascript" src="js/tree-management.js"/>
+<script type="text/javascript" src="js/jquery.autocomplete.js"/>
+<script type="text/javascript" src="js/cookies.js"/>
+<script type="text/javascript" src="js/script.js"/>
+<script type="text/javascript" src="js/jscript_xjquery.jqtransform.js"/>
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery.noty.packaged.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/rating.min.js"></script>
+<script src="js/my.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var categories = [[${categoryList}]];
+    var lastBooks = [[${lastBooks}]];
+    var downloadLink = [[${@environment.getProperty('file.service.url')}]];
+    var book = [[${book}]];
+    var email = [[${email}]];
+    var userId = [[${userId}]];
+    var locale = [[${#locale}]].ISO3Language;
+    var welcomeMessage = [[#{welcome.message}]];
+    var login = [[#{log.in}]];
+    var logout = [[#{log.out}]];
+    var downloadMessage = [[#{download}]];
+    var authorsMessage = [[#{authors}]];
+    var ratingMessage = [[#{rating}]];
+    var votesMessage = [[#{votes}]];
+
+    $(function () {
+        resolveLocale(locale)
+        initUserCred(email, userId, welcomeMessage, login, logout);
+        activateDatePicker();
+        initCategories(categories);
+        initLastBooks(lastBooks, downloadLink, userId, downloadMessage);
+        addRating(book.rating.votes, book.rating.points, book.id, userId, ratingMessage, votesMessage);
+        initComments();
+        initDownloadButtons(downloadLink, userId, authorsMessage);
+    });
+    /*]]>*/
+</script>
+</body>
+</html>
