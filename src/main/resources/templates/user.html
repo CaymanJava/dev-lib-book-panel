@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Authentication - Books</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link href="css/global.css" rel="stylesheet"/>
+    <link href="css/jquery.autocomplete.css" rel="stylesheet"/>
+    <link href="css/jquery-ui.min.css" rel="stylesheet"/>
+
+</head>
+<body id="authentication">
+
+<p id="back-top"><a href="#top"><span></span></a></p>
+<div id="wrapper1">
+    <div id="wrapper2">
+        <div id="wrapper3">
+
+            <th:block th:include="fragments :: header">
+            </th:block>
+            <div id="columns">
+
+                <th:block th:include="fragments :: left_column">
+                </th:block>
+
+                <div id="center_column" class="center_column">
+                    <div class="breadcrumb bordercolor">
+                        <div class="breadcrumb_inner">
+                            <a href="https://livedemo00.template-help.com/prestashop_40228/"
+                               title="return to Home">Home</a>
+                            <span class="navigation-pipe">></span>
+                            <a href="https://livedemo00.template-help.com/prestashop_40228/my-account.php">My
+                                account</a>
+                            <span class="navigation-pipe">></span>
+                            Your personal information
+                        </div>
+                    </div>
+                    <h1>Your personal information</h1>
+                    <h3>Please do not hesitate to update your personal information if it has changed.</h3>
+                    <form class="std identity" action="https://livedemo00.template-help.com/prestashop_40228/identity.php" method="post">
+                        <fieldset>
+                            <p class="required text">
+                                <label for="email">E-mail</label>
+                                <input id="email" name="email" value="onlinebankrecipient@gmail.com" type="text"/>
+                                <sup>*</sup>
+                            </p>
+                            <p class="required text">
+                                <label for="old_passwd">Current Password</label>
+                                <input id="old_passwd" name="old_passwd" type="password"/>
+                                <sup>*</sup>
+                            </p>
+                            <p class="password">
+                                <label for="passwd">New Password</label>
+                                <input id="passwd" name="passwd" type="password"/>
+                            </p>
+                            <p class="required required_desc">
+                                <sup>*</sup>
+                                Required field
+                            </p>
+                            <p class="submit">
+                                <input class="button" name="submitIdentity" value="Save" type="submit"/>
+                            </p>
+                        </fieldset>
+                    </form>
+                    <ul class="footer_links">
+                        <li>
+                            <a href="https://livedemo00.template-help.com/prestashop_40228/">
+                                <img class="icon"
+                                     src="https://livedemo00.template-help.com/prestashop_40228/themes/theme432/img/icon/home.png"/>
+                            </a>
+                            <a href="https://livedemo00.template-help.com/prestashop_40228/">Home</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearblock"></div>
+            </div>
+        </div>
+        <th:block th:include="fragments :: footer">
+        </th:block>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery-1.4.4.min.js"/>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"/>
+<script type="text/javascript" src="js/tools.js"/>
+<script type="text/javascript" src="js/ajax-cart.js"/>
+<script type="text/javascript" src="js/treeManagement.js"/>
+<script type="text/javascript" src="js/jquery.autocomplete.js"/>
+<script type="text/javascript" src="js/cookies.js"/>
+<script type="text/javascript" src="js/script.js"/>
+<script type="text/javascript" src="js/jscript_xjquery.jqtransform.js"/>
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery.noty.packaged.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/my.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var categories = [[${categoryList}]];
+    var email = [[${email}]];
+    var userId = [[${userId}]];
+    var locale = [[${#locale}]].ISO3Language;
+    var welcomeMessage = [[#{welcome.message}]];
+    var login = [[#{log.in}]];
+    var logout = [[#{log.out}]];
+    $(function () {
+        resolveLocale(locale)
+        initUserCred(email, userId, welcomeMessage, login, logout);
+        activateDatePicker();
+        initCategories(categories);
+    });
+    /*]]>*/
+
+</script>
+</body>
+</html>

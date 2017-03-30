@@ -78,6 +78,15 @@ noscript ul {
     padding: 10px;
 }
 
+.about_title {
+    background: #eee none repeat scroll 0 0;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 0 0 -20px;
+    padding: 10px 20px;
+}
+
 .clearfix:after {
     clear: both;
     display: block;
@@ -458,7 +467,7 @@ div.rte th {
 
 .center_column .rte ul li {
     padding: 5px 0 0 13px;
-    background: url(../img/bullet_alt.png) 0 9px no-repeat;
+    /*background: url(../img/bullet_alt.png) 0 9px no-repeat;*/
 }
 
 .center_column .rte hr {
@@ -615,38 +624,6 @@ input.button_mini:hover, a.button_mini:hover, input.button_small:hover, a.button
     -moz-transition: background 0.2s ease;
     -o-transition: background 0.2s ease;
     -webkit-transition: background 0.2s ease;
-}
-
-input.button_mini, input.button_mini_disabled, a.button_mini, span.button_mini, input.exclusive_mini, input.exclusive_mini_disabled, a.exclusive_mini, span.exclusive_mini {
-    background-position:;
-}
-
-input.button_mini:hover, a.button_mini:hover, input.exclusive_mini:hover, a.exclusive_mini:hover {
-    background-position:;
-}
-
-input.button_small, input.button_small_disabled, a.button_small, span.button_small, input.exclusive_small, input.exclusive_small_disabled, a.exclusive_small, span.exclusive_small {
-    background-position:;
-}
-
-input.button_small:hover, a.button_small:hover, input.exclusive_small:hover, a.exclusive_small:hover {
-    background-position:;
-}
-
-input.button, input.button_disabled, a.button, span.button, input.exclusive, input.exclusive_disabled, a.exclusive, span.exclusive {
-    background-position:;
-}
-
-input.button:hover, a.button:hover, input.exclusive:hover, a.exclusive:hover {
-    background-position:;
-}
-
-input.button_large, input.button_large_disabled, a.button_large, span.button_large, input.exclusive_large, input.exclusive_large_disabled, a.exclusive_large, span.exclusive_large {
-    background-position:;
-}
-
-input.button_large:hover, a.button_large:hover, input.exclusive_large:hover, a.exclusive_large:hover {
-    background-position:;
 }
 
 div.table_block {
@@ -882,7 +859,7 @@ form.std .required_desc {
 
 #header {
     padding: 230px 0 0 0;
-    background: url(../img/header-bg.gif) repeat-x 0 100%;
+    /*background: url(../img/header-bg.gif) repeat-x 0 100%;*/
     position: relative;
     border-bottom: 4px solid #000;
 }
@@ -956,7 +933,7 @@ form.std .required_desc {
 }
 
 #header #currencies_block_top .jqTransformSelectWrapper {
-    background: url(../img/cur-arrow.gif) no-repeat right 0px;
+    /*background: url(../img/cur-arrow.gif) no-repeat right 0px;*/
     border: none;
     float: left;
     width: 73px !important;
@@ -1259,7 +1236,7 @@ div.column div.block ul.bullet {
 
 div.column div.block ul.bullet li {
     padding: 4px 0 0 12px;
-    background: url(../img/bullet.png) 0 8px no-repeat;
+    /*background: url(../img/bullet.png) 0 8px no-repeat;*/
 }
 
 #tmspecials {
@@ -1396,14 +1373,6 @@ div.column div.block ul.bullet li {
     top: 12px;
 }
 
-#categories_block_left span.OPEN {
-    background: url(../img/categories_minus.gif) 3px 3px no-repeat;
-}
-
-#categories_block_left span.CLOSE {
-    background: url(../img/categories_plus.gif) 3px 3px no-repeat;
-}
-
 #cart_block {
 }
 
@@ -1491,7 +1460,7 @@ div.column div.block ul.bullet li {
     float: right;
     font-size: 0;
     display: block;
-    background: url(../img/icon/delete.gif) 0 bottom no-repeat;
+    /*background: url(../img/icon/delete.gif) 0 bottom no-repeat;*/
 }
 
 #cart_block a.ajax_cart_block_remove_link:hover {
@@ -1519,7 +1488,7 @@ div.column div.block ul.bullet li {
     font-size: 0;
     display: block;
     float: right;
-    background: url(../img/icon/delete.gif) 0 bottom no-repeat;
+    /*background: url(../img/icon/delete.gif) 0 bottom no-repeat;*/
 }
 
 #cart_block table#vouchers tr td.delete a img {
@@ -1673,7 +1642,6 @@ div.column div.block ul.bullet li {
 }
 
 .products_block .button_large {
-    width:;
     margin: 17px 0 0 0;
 }
 
@@ -1906,13 +1874,13 @@ div.paiement_logo_block img + img {
     left: 0;
     bottom: 0;
     z-index: 89;
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader() !important;
+    /*filter: progid:DXImageTransform.Microsoft.AlphaImageLoader() !important;*/
 }
 
 .nivo-caption > p {
     margin: 0;
     padding: 10px;
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader() !important;
+    /*filter: progid:DXImageTransform.Microsoft.AlphaImageLoader() !important;*/
 }
 
 .nivo-caption h2 {
@@ -1961,7 +1929,7 @@ div.paiement_logo_block img + img {
     width: 61px;
     height: 61px;
     text-indent: -9999px;
-    background: url('../img/nivo_nav.png') top left no-repeat;
+    /*background: url('../img/nivo_nav.png') top left no-repeat;*/
 }
 
 .nivo-nextNav {
@@ -1970,7 +1938,7 @@ div.paiement_logo_block img + img {
     width: 61px;
     height: 61px;
     text-indent: -9999px;
-    background: url('../img/nivo_nav.png') top right no-repeat;
+    /*background: url('../img/nivo_nav.png') top right no-repeat;*/
 }
 
 .nivo-controlNav {
@@ -1987,7 +1955,7 @@ div.paiement_logo_block img + img {
     padding: 10px 0 0 0;
     overflow: hidden;
     float: left;
-    background: url(../img/slider_item.png) 0 0 no-repeat #aaa;
+    /*background: url(../img/slider_item.png) 0 0 no-repeat #aaa;*/
     cursor: pointer;
 }
 
@@ -1996,7 +1964,7 @@ div.paiement_logo_block img + img {
 }
 
 .nivo-controlNav a.active {
-    background: url(../img/slider_item_active.png) 0 0 no-repeat #fff;
+    /*background: url(../img/slider_item_active.png) 0 0 no-repeat #fff;*/
 }
 
 #featured_products {
@@ -2093,7 +2061,7 @@ div.paiement_logo_block img + img {
     padding: 3px 24px 0 0;
     color: #fff;
     float: left;
-    background: url(../img/line1.gif) no-repeat 100% 4px;
+    /*background: url(../img/line1.gif) no-repeat 100% 4px;*/
 }
 
 #featured_products ul li .button {
@@ -2132,7 +2100,7 @@ div.paiement_logo_block img + img {
 #subcategories ul li {
     float: left;
     margin: 20px 20px 0 0;
-    background: url(../img/tail-sub.gif) 0px 20px repeat-x #f6f6f6;
+    /*background: url(../img/tail-sub.gif) 0px 20px repeat-x #f6f6f6;*/
     height: 186px;
     border: 1px solid #E6E4E4;
     position: relative;
@@ -2141,7 +2109,7 @@ div.paiement_logo_block img + img {
 #subcategories ul li:hover {
     background-position: 0 -167px;
     border: 1px solid #333;
-    background: url(../img/tail-sub.gif) 0px -167px repeat-x #333333
+    /*background: url(../img/tail-sub.gif) 0px -167px repeat-x #333333*/
 }
 
 #subcategories {
@@ -2177,7 +2145,7 @@ div.paiement_logo_block img + img {
 }
 
 #subcategories ul li strong {
-    background: url(../img/icon-sub.png) 0px 0px no-repeat;
+    /*background: url(../img/icon-sub.png) 0px 0px no-repeat;*/
     width: 12px;
     height: 12px;
     position: absolute;
@@ -2499,7 +2467,6 @@ div.paiement_logo_block img + img {
 
 .pagination li.current span {
     font-weight: bold;
-    color: #;
 }
 
 .pagination li.truncate {
@@ -2646,7 +2613,7 @@ div#stores_block table#stores-table {
 
 #product_comparison .comparison_product_infos a.cmp_remove {
     padding: 0 0 0 15px;
-    background: url(../img/icon/delete.gif) 0 2px no-repeat;
+    /*background: url(../img/icon/delete.gif) 0 2px no-repeat;*/
     color: #dd0000;
     text-decoration: none;
 }
@@ -2733,7 +2700,7 @@ img.jqzoom {
     display: block;
     padding: 80px 0 0 0;
     overflow: hidden;
-    background: url(../img/arrow_thumbs.gif) 0 0 no-repeat;
+    /*background: url(../img/arrow_thumbs.gif) 0 0 no-repeat;*/
     position: absolute;
     top: 0;
 }
@@ -2793,14 +2760,14 @@ span#wrapResetImages div {
     clear: both;
     padding: 9px 0 6px 20px;
     overflow: hidden;
-    background: url(../img/gradient_light.png) 0 bottom repeat-x;
+    /*background: url(../img/gradient_light.png) 0 bottom repeat-x;*/
     border-width: 1px;
     border-style: solid;
 }
 
 #usefull_link_block li {
     padding: 2px 0 0 23px;
-    background: url(../img/bullet_alt.png) 0 12px no-repeat;
+    /*background: url(../img/bullet_alt.png) 0 12px no-repeat;*/
     float: left;
     margin-right: 12px;
     margin-bottom: 5px;
@@ -3097,7 +3064,7 @@ span#wrapResetImages div {
     margin: 20px 0 0 0;
     padding: 10px;
     overflow: hidden;
-    background: url(../img/gradient_light.png) 0 bottom repeat-x;
+    /*background: url(../img/gradient_light.png) 0 bottom repeat-x;*/
     border-width: 1px 0;
     border-style: solid;
     line-height: normal;

@@ -6,7 +6,7 @@
 
     <groupId>dev-lib-book-panel</groupId>
     <artifactId>dev-lib-book-panel</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <name>admin-panel</name>
     <description>file-service</description>

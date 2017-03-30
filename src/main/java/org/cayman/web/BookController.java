@@ -1,5 +1,6 @@
 package org.cayman.web;
 
+import lombok.extern.slf4j.Slf4j;
 import org.cayman.dto.Book;
 import org.cayman.dto.Rating;
 import org.cayman.model.Role;
@@ -18,8 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 import java.util.Locale;
-
+//TODO refactoring!!!!
 @Controller
+@Slf4j
 public class BookController {
     private final AuthorService authorService;
     private final BookService bookService;
@@ -80,12 +82,42 @@ public class BookController {
         return true;
     }
 
+    @RequestMapping(value = "user", method = RequestMethod.GET)
+    public String userInfo(Model model) {
+        addUserCredToModel(model);
+        model.addAttribute("categoryList", categoryService.getAllCategories());
+        return "user";
+    }
+
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String startPage(Model model) {
         addUserCredToModel(model);
         model.addAttribute("categoryList", categoryService.getAllCategories());
         model.addAttribute("bookList", bookService.getLastTwelveBooks());
         return "index";
+    }
+
+    @RequestMapping(value = "about", method = RequestMethod.GET)
+    public String about(Model model) {
+        addUserCredToModel(model);
+        model.addAttribute("categoryList", categoryService.getAllCategories());
+        return "about";
+    }
+
+    @RequestMapping(value = "contact", method = RequestMethod.GET)
+    public String contact(Model model) {
+        addUserCredToModel(model);
+        model.addAttribute("categoryList", categoryService.getAllCategories());
+        return "contact";
+    }
+
+    @RequestMapping(value="contact", method = RequestMethod.POST)
+    public @ResponseBody Boolean sendMessage(@RequestParam("email") String email,
+                                              @RequestParam("message") String message) {
+        //TODO
+        log.info("Email: " + email);
+        log.info("Message: " + message);
+        return true;
     }
 
     @RequestMapping(value = "category", method = RequestMethod.GET)

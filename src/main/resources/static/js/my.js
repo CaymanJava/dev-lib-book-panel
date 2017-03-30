@@ -345,6 +345,28 @@ $('#submit_create').click(function() {
     }
 });
 
+$('#submitMessage').click(function() {
+    var email = $('#email').val();
+    var message = $('#message').val();
+    var emailCorrect = checkEmail(email);
+
+    if (emailCorrect) {
+        $.ajax({
+            type: "POST",
+            url: "contact",
+            data: {email:email, message:message},
+            success: function (response) {
+                if (response) {
+                    $('#message_form').attr('class', 'hidden')
+                    $('#success').attr('class', '')
+                } else {
+                    notifyAlert("Something was wrong. Try one more time")
+                }
+            }
+        });
+    }
+});
+
 $('#product_view_grid').click(function () {
     $('#product_list').attr('class', 'bordercolor grid');
     $('#product_view_grid').attr('class', 'current');

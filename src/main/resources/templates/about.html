@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Authentication - Books</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link href="css/global.css" rel="stylesheet"/>
+    <link href="css/jquery.autocomplete.css" rel="stylesheet"/>
+    <link href="css/jquery-ui.min.css" rel="stylesheet"/>
+
+</head>
+<body id="authentication">
+
+<p id="back-top"><a href="#top"><span></span></a></p>
+<div id="wrapper1">
+    <div id="wrapper2">
+        <div id="wrapper3">
+
+            <th:block th:include="fragments :: header">
+            </th:block>
+            <div id="columns">
+
+                <th:block th:include="fragments :: left_column">
+                </th:block>
+
+                <div id="center_column" class="center_column">
+                    <div class="breadcrumb bordercolor">
+                        <div class="breadcrumb_inner">
+                            <a href="/" title="return to Home" th:text="#{header.home}"></a>
+                            <span class="navigation-pipe">></span>
+                            <span class="navigation_page" th:text="#{header.about}"></span>
+                        </div>
+                    </div>
+                    <div class="rte">
+                        <h1 th:text="#{header.about}"></h1>
+                        <p>
+                            <span style="font-size: 12pt; color: #000000;" th:text="#{about.title}"></span>
+                        </p>
+                        <p th:text="#{about.text}"></p>
+                    </div>
+                </div>
+                <div class="clearblock"></div>
+
+                <div class="clearblock"></div>
+            </div>
+        </div>
+        <th:block th:include="fragments :: footer">
+        </th:block>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery-1.4.4.min.js"/>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"/>
+<script type="text/javascript" src="js/tools.js"/>
+<script type="text/javascript" src="js/ajax-cart.js"/>
+<script type="text/javascript" src="js/treeManagement.js"/>
+<script type="text/javascript" src="js/jquery.autocomplete.js"/>
+<script type="text/javascript" src="js/cookies.js"/>
+<script type="text/javascript" src="js/script.js"/>
+<script type="text/javascript" src="js/jscript_xjquery.jqtransform.js"/>
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery.noty.packaged.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/my.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var categories = [[${categoryList}]];
+    var email = [[${email}]];
+    var userId = [[${userId}]];
+    var locale = [[${#locale}]].ISO3Language;
+    var welcomeMessage = [[#{welcome.message}]];
+    var login = [[#{log.in}]];
+    var logout = [[#{log.out}]];
+    $(function () {
+        resolveLocale(locale)
+        initUserCred(email, userId, welcomeMessage, login, logout);
+        activateDatePicker();
+        initCategories(categories);
+    });
+    /*]]>*/
+
+</script>
+</body>
+</html>
