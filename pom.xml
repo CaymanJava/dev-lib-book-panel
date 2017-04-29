@@ -6,10 +6,10 @@
 
     <groupId>dev-lib-book-panel</groupId>
     <artifactId>dev-lib-book-panel</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 
-    <name>admin-panel</name>
-    <description>file-service</description>
+    <name>book-panel</name>
+    <description>book-panel</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
