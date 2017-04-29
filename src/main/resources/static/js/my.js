@@ -345,6 +345,32 @@ $('#submit_create').click(function() {
     }
 });
 
+$('#change_user').click(function () {
+    var id = $('#id').val();
+    var email = $('#email').val();
+    var oldPass = $('#old_passwd').val();
+    var newPass = $('#new_passwd').val();
+    var newPassConfirm = $('#new_passwd_confirm').val();
+
+    var emailCorrect = checkEmail(email);
+    var passwordCorrect = checkPassword(newPass, newPassConfirm)
+
+    if (emailCorrect && passwordCorrect) {
+        $.ajax({
+            type: "POST",
+            url: "user",
+            data: {id:id, email:email, old_password:oldPass, new_password:newPass},
+            success: function (response) {
+                if (response) {
+                    notifyMessage("Your information has been changed.")
+                } else {
+                    notifyAlert("Old password is incorrect.")
+                }
+            }
+        });
+    }
+});
+
 $('#submitMessage').click(function() {
     var email = $('#email').val();
     var message = $('#message').val();

@@ -1,22 +1,33 @@
 package org.cayman.web;
 
 import lombok.extern.slf4j.Slf4j;
-import org.cayman.exception.ExceptionDto;
+import org.cayman.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @ControllerAdvice
 @Slf4j
 public class GlobalControllerExceptionHandler {
+
+    private final CategoryService categoryService;
+
+    @Autowired
+    public GlobalControllerExceptionHandler(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
     @ExceptionHandler(Exception.class)
     @Order(Ordered.LOWEST_PRECEDENCE)
-    @ResponseBody
-    ExceptionDto defaultErrorHandler(Exception e) throws Exception {
+    String defaultErrorHandler(Model model, Exception e) throws Exception {
         log.warn("Exception: ", e);
-        return new ExceptionDto(e.getMessage());
+        model.addAttribute("email", "");
+        model.addAttribute("userId", 0);
+        model.addAttribute("categoryList", categoryService.getAllCategories());
+        return "error";
     }
 }

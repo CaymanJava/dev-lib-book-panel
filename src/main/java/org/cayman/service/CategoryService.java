@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -24,8 +25,9 @@ public class CategoryService {
 
     public List<Category> getAllCategories() {
         String url = constants.getBookServiceUrl() + "/category";
-        Category[] categories = restTemplate.getForObject(url, Category[].class);
-        return Arrays.asList(categories);
+        List<Category> categories = Arrays.asList(restTemplate.getForObject(url, Category[].class));
+        Collections.sort(categories);
+        return categories;
     }
 
     public Category getById(int id) {

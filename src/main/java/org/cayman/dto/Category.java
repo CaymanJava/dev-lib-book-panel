@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category {
+public class Category implements Comparable {
     public Category(int id, String name) {
         this.id = id;
         this.name = name;
@@ -16,4 +16,9 @@ public class Category {
     private int id;
     private String name;
     private String image;
+
+    @Override
+    public int compareTo(Object o) {
+        return this.getName().compareTo(((Category) o).getName());
+    }
 }

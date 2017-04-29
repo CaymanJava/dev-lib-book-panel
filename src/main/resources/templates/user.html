@@ -27,49 +27,54 @@
                 <div id="center_column" class="center_column">
                     <div class="breadcrumb bordercolor">
                         <div class="breadcrumb_inner">
-                            <a href="https://livedemo00.template-help.com/prestashop_40228/"
-                               title="return to Home">Home</a>
+                            <a href="/"
+                               title="return to Home" th:text="#{header.home}"></a>
                             <span class="navigation-pipe">></span>
-                            <a href="https://livedemo00.template-help.com/prestashop_40228/my-account.php">My
-                                account</a>
+                            <span th:text="#{my.account}"></span>
                             <span class="navigation-pipe">></span>
-                            Your personal information
+                            <span th:text="#{your.information}"></span>
                         </div>
                     </div>
-                    <h1>Your personal information</h1>
-                    <h3>Please do not hesitate to update your personal information if it has changed.</h3>
-                    <form class="std identity" action="https://livedemo00.template-help.com/prestashop_40228/identity.php" method="post">
+                    <h1 th:text="#{your.information}"></h1>
+                    <h3 th:text="#{do.not.hesitate}"></h3>
+                    <form class="std identity" action="user" method="post">
                         <fieldset>
                             <p class="required text">
                                 <label for="email">E-mail</label>
-                                <input id="email" name="email" value="onlinebankrecipient@gmail.com" type="text"/>
+                                <input id="email" name="email" th:value="${email}" type="text"/>
+                                <input id="id" name="id" type="number" th:value="${userId}" class="hidden"/>
                                 <sup>*</sup>
                             </p>
                             <p class="required text">
-                                <label for="old_passwd">Current Password</label>
+                                <label for="old_passwd" th:text="#{current.password}"></label>
                                 <input id="old_passwd" name="old_passwd" type="password"/>
                                 <sup>*</sup>
                             </p>
-                            <p class="password">
-                                <label for="passwd">New Password</label>
-                                <input id="passwd" name="passwd" type="password"/>
+                            <p class="required text">
+                                <label for="new_passwd" th:text="#{new.password}"></label>
+                                <input id="new_passwd" name="passwd" type="password"/>
+                                <sup>*</sup>
+                            </p>
+                            <p class="required text">
+                                <label for="new_passwd_confirm" th:text="#{new.password.confirm}"></label>
+                                <input id="new_passwd_confirm" name="passwd" type="password"/>
+                                <sup>*</sup>
                             </p>
                             <p class="required required_desc">
                                 <sup>*</sup>
-                                Required field
+                                <b th:text="#{required.field}"></b>
                             </p>
                             <p class="submit">
-                                <input class="button" name="submitIdentity" value="Save" type="submit"/>
+                                <input class="button" id="change_user" name="submitIdentity" th:value="#{save}"/>
                             </p>
                         </fieldset>
                     </form>
                     <ul class="footer_links">
                         <li>
-                            <a href="https://livedemo00.template-help.com/prestashop_40228/">
-                                <img class="icon"
-                                     src="https://livedemo00.template-help.com/prestashop_40228/themes/theme432/img/icon/home.png"/>
+                            <a href="/">
+                                <img class="icon" alt="" th:src="@{images/home.png}"/>
                             </a>
-                            <a href="https://livedemo00.template-help.com/prestashop_40228/">Home</a>
+                            <a href="/" th:text="#{header.home}"></a>
                         </li>
                     </ul>
                 </div>

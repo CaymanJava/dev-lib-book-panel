@@ -91,6 +91,7 @@
     var login = [[#{log.in}]];
     var logout = [[#{log.out}]];
     $(function () {
+        $('#contact_page').attr('class', 'active')
         resolveLocale(locale)
         initUserCred(email, userId, welcomeMessage, login, logout);
         activateDatePicker();

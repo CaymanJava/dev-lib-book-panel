@@ -25,20 +25,7 @@
                 </th:block>
 
                 <div id="center_column" class="center_column">
-                    <div class="breadcrumb bordercolor">
-                        <div class="breadcrumb_inner">
-                            <a href="/" title="return to Home" th:text="#{header.home}"></a>
-                            <span class="navigation-pipe">></span>
-                            <span class="navigation_page" th:text="#{header.about}"></span>
-                        </div>
-                    </div>
-                    <div class="rte">
-                        <h1 th:text="#{header.about}"></h1>
-                        <p>
-                            <span style="font-size: 12pt; color: #000000;" th:text="#{about.title}"></span>
-                        </p>
-                        <p th:text="#{about.text}"></p>
-                    </div>
+                    <img style="margin-left:15%" th:src="@{images/error.jpg}"/>
                 </div>
                 <div class="clearblock"></div>
 
@@ -73,7 +60,6 @@
     var login = [[#{log.in}]];
     var logout = [[#{log.out}]];
     $(function () {
-        $('#about_page').attr('class', 'active')
         resolveLocale(locale)
         initUserCred(email, userId, welcomeMessage, login, logout);
         activateDatePicker();

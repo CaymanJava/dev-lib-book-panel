@@ -22,7 +22,15 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    public User getById(int id) {
+        return userRepository.findOne(id);
+    }
+
     public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    public User update(User user) {
         return userRepository.save(user);
     }
 

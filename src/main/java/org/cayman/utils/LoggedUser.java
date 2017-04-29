@@ -24,6 +24,10 @@ public class LoggedUser extends org.springframework.security.core.userdetails.Us
         return (user instanceof LoggedUser) ? (LoggedUser) user : null;
     }
 
+    public boolean checkPassword(String password) {
+        return user != null && password.equals(user.getPassword());
+    }
+
     public static int id() {
         return get().user.getId();
     }

@@ -1,4 +1,4 @@
-package org.cayman.web;
+package org.cayman.web.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.cayman.dto.Book;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 import java.util.Locale;
-//TODO refactoring!!!!
+
 @Controller
 @Slf4j
 public class BookController {
@@ -87,6 +87,20 @@ public class BookController {
         addUserCredToModel(model);
         model.addAttribute("categoryList", categoryService.getAllCategories());
         return "user";
+    }
+
+    @RequestMapping(value = "user", method = RequestMethod.POST)
+    public @ResponseBody boolean editUser(Model model,
+                           @RequestParam("id") int id,
+                           @RequestParam("email") String email,
+                           @RequestParam("old_password") String oldPassword,
+                           @RequestParam("new_password") String newPassword) {
+        if (!LoggedUser.get().checkPassword(oldPassword)) return false;
+        User user = userService.getById(id);
+        user.setEmail(email);
+        user.setPassword(newPassword);
+        userService.update(user);
+        return true;
     }
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
