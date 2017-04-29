@@ -5,7 +5,6 @@
             <img class="logo" th:src="@{/images/logo.png}" alt="Books"/>
         </a>
         <div id="header_right">
-
             <div id="languages_block_top">
                 <ul id="first-languages">
                     <li id="lang_en">
@@ -21,6 +20,12 @@
             <ul id="tmheaderlinks">
                 <li>
                     <a href="/" id="main_page" th:text="#{header.home}"></a>
+                </li>
+                <li>
+                    <a href="authors" id="authors_page" th:text="#{header.authors}"></a>
+                </li>
+                <li>
+                    <a href="publishers" id="publishers_page" th:text="#{header.publishers}"></a>
                 </li>
                 <li>
                     <a href="about" id="about_page" th:text="#{header.about}"></a>
@@ -141,7 +146,7 @@
                         <li><a id="your_account_footer" th:text="#{header.your.account}"></a></li>
                     </ul>
                 </div>
-                <p>&copy; 2017 Powered by <a href="https://github.com/CaymanJava">Cayman</a>&trade;. All rights
+                <p>&copy; 2017 Powered by <a href="https://github.com/CaymanJava">Cayman</a>. All rights
                     reserved :)</p>
             </div>
             <div id="tmsocial" class="block">

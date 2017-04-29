@@ -131,7 +131,7 @@
                 var id = bookList[y].id;
                 var name = bookList[y].name;
                 var image = bookList[y].image;
-                var description = bookList[y].description;
+                var description = bookList[y].description.substring(0, 600) + '...';
                 var authorList = authors(bookList[y].author, authorsMessage);
                 var publisherId = bookList[y].publisher.id;
                 var publisherName = bookList[y].publisher.name;

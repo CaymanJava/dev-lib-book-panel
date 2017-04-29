@@ -22,7 +22,7 @@ import java.util.Locale;
 
 @Controller
 @Slf4j
-public class BookController {
+public class CommonController {
     private final AuthorService authorService;
     private final BookService bookService;
     private final CategoryService categoryService;
@@ -32,10 +32,10 @@ public class BookController {
     private final MessageSource messageSource;
 
     @Autowired
-    public BookController(AuthorService authorService, BookService bookService,
-                          CategoryService categoryService, PublisherService publisherService,
-                          UserService userService, CustomSecurityService securityService,
-                          MessageSource messageSource) {
+    public CommonController(AuthorService authorService, BookService bookService,
+                            CategoryService categoryService, PublisherService publisherService,
+                            UserService userService, CustomSecurityService securityService,
+                            MessageSource messageSource) {
         this.authorService = authorService;
         this.bookService = bookService;
         this.categoryService = categoryService;
@@ -62,8 +62,7 @@ public class BookController {
 
     @RequestMapping(value="auth", method = RequestMethod.GET)
     public String auth(Model model) {
-        addUserCredToModel(model);
-        model.addAttribute("categoryList", categoryService.getAllCategories());
+        addUserCredAndCategoriesToModel(model);
         return "auth";
     }
 
@@ -84,17 +83,15 @@ public class BookController {
 
     @RequestMapping(value = "user", method = RequestMethod.GET)
     public String userInfo(Model model) {
-        addUserCredToModel(model);
-        model.addAttribute("categoryList", categoryService.getAllCategories());
+        addUserCredAndCategoriesToModel(model);
         return "user";
     }
 
     @RequestMapping(value = "user", method = RequestMethod.POST)
-    public @ResponseBody boolean editUser(Model model,
-                           @RequestParam("id") int id,
-                           @RequestParam("email") String email,
-                           @RequestParam("old_password") String oldPassword,
-                           @RequestParam("new_password") String newPassword) {
+    public @ResponseBody boolean editUser(@RequestParam("id") int id,
+                                          @RequestParam("email") String email,
+                                          @RequestParam("old_password") String oldPassword,
+                                          @RequestParam("new_password") String newPassword) {
         if (!LoggedUser.get().checkPassword(oldPassword)) return false;
         User user = userService.getById(id);
         user.setEmail(email);
@@ -105,23 +102,36 @@ public class BookController {
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String startPage(Model model) {
-        addUserCredToModel(model);
-        model.addAttribute("categoryList", categoryService.getAllCategories());
+        addUserCredAndCategoriesToModel(model);
         model.addAttribute("bookList", bookService.getLastTwelveBooks());
         return "index";
     }
 
     @RequestMapping(value = "about", method = RequestMethod.GET)
     public String about(Model model) {
-        addUserCredToModel(model);
-        model.addAttribute("categoryList", categoryService.getAllCategories());
+        addUserCredAndCategoriesToModel(model);
         return "about";
+    }
+
+    @RequestMapping(value = "author", method = RequestMethod.GET)
+    public String author(Model model, @RequestParam("id") int id) {
+        addUserCredAndCategoriesToModel(model);
+        model.addAttribute("bookListDto", bookService.getAllByAuthorId(id));
+        model.addAttribute("categoryId", 0);
+        model.addAttribute("title", authorService.getById(id).getName());
+        return "books";
+    }
+
+    @RequestMapping(value = "authors", method = RequestMethod.GET)
+    public String authors(Model model) {
+        addUserCredAndCategoriesToModel(model);
+        model.addAttribute("authorList", authorService.getAllAuthors());
+        return "authors";
     }
 
     @RequestMapping(value = "contact", method = RequestMethod.GET)
     public String contact(Model model) {
-        addUserCredToModel(model);
-        model.addAttribute("categoryList", categoryService.getAllCategories());
+        addUserCredAndCategoriesToModel(model);
         return "contact";
     }
 
@@ -136,8 +146,7 @@ public class BookController {
 
     @RequestMapping(value = "category", method = RequestMethod.GET)
     public String category(Model model, @RequestParam("id") int id) {
-        addUserCredToModel(model);
-        model.addAttribute("categoryList", categoryService.getAllCategories());
+        addUserCredAndCategoriesToModel(model);
         model.addAttribute("bookListDto", bookService.getAllBooksByCategoryId(id));
         model.addAttribute("categoryId", id);
         model.addAttribute("title", categoryService.getById(id).getName());
@@ -146,7 +155,7 @@ public class BookController {
 
     @RequestMapping(value = "publisher", method = RequestMethod.GET)
     public String publisher(Model model, @RequestParam("id") int id) {
-        addUserCredToModel(model);
+        addUserCredAndCategoriesToModel(model);
         model.addAttribute("categoryList", categoryService.getAllCategories());
         model.addAttribute("bookListDto", bookService.getAllBooksByPublisherId(id));
         model.addAttribute("categoryId", 0);
@@ -154,20 +163,16 @@ public class BookController {
         return "books";
     }
 
-    @RequestMapping(value = "author", method = RequestMethod.GET)
-    public String author(Model model, @RequestParam("id") int id) {
-        addUserCredToModel(model);
-        model.addAttribute("categoryList", categoryService.getAllCategories());
-        model.addAttribute("bookListDto", bookService.getAllByAuthorId(id));
-        model.addAttribute("categoryId", 0);
-        model.addAttribute("title", authorService.getById(id).getName());
-        return "books";
+    @RequestMapping(value = "publishers", method = RequestMethod.GET)
+    public String publishers(Model model) {
+        addUserCredAndCategoriesToModel(model);
+        model.addAttribute("publisherList", publisherService.getAllPublishers());
+        return "publishers";
     }
 
     @RequestMapping(value = "search", method = RequestMethod.POST)
     public String search(Model model,  Locale locale, @RequestParam("keyword") String keyword) {
-        addUserCredToModel(model);
-        model.addAttribute("categoryList", categoryService.getAllCategories());
+        addUserCredAndCategoriesToModel(model);
         model.addAttribute("bookListDto", bookService.search(keyword));
         model.addAttribute("categoryId", 0);
         model.addAttribute("title", messageSource.getMessage("search.result", null, locale) + ": \""  + keyword + "\"");
@@ -180,8 +185,7 @@ public class BookController {
                          @RequestParam("category") int categoryId,
                          @RequestParam("from_year") int fromYear,
                          @RequestParam("to_year") int toYear) {
-        addUserCredToModel(model);
-        model.addAttribute("categoryList", categoryService.getAllCategories());
+        addUserCredAndCategoriesToModel(model);
         model.addAttribute("bookListDto", bookService.filter(lang, categoryId, fromYear, toYear));
         model.addAttribute("categoryId", 0);
         model.addAttribute("title", messageSource.getMessage("filter.title", null, locale));
@@ -198,15 +202,15 @@ public class BookController {
 
     @RequestMapping(value = "book", method = RequestMethod.GET)
     public String getBook(Model model, @RequestParam("id") int id) {
-        addUserCredToModel(model);
+        addUserCredAndCategoriesToModel(model);
         Book book = bookService.getBookById(id);
-        model.addAttribute("categoryList", categoryService.getAllCategories());
         model.addAttribute("book", book);
         model.addAttribute("lastBooks", bookService.getLastFourBooksInCategory(book.getCategory().getId(), id));
         return "book";
     }
 
-    private void addUserCredToModel(Model model) {
+    private void addUserCredAndCategoriesToModel(Model model) {
+        addCategoriesInModel(model);
         LoggedUser loggedUser = LoggedUser.get();
         if (loggedUser != null) {
             model.addAttribute("email", loggedUser.getUsername());
@@ -215,5 +219,9 @@ public class BookController {
             model.addAttribute("email", "");
             model.addAttribute("userId", 0);
         }
+    }
+
+    private void addCategoriesInModel(Model model) {
+        model.addAttribute("categoryList", categoryService.getAllCategories());
     }
 }

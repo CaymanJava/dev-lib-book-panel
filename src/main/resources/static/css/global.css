@@ -859,7 +859,7 @@ form.std .required_desc {
 
 #header {
     padding: 230px 0 0 0;
-    /*background: url(../img/header-bg.gif) repeat-x 0 100%;*/
+    background: url(../images/header-bg.gif) repeat-x 0 100%;
     position: relative;
     border-bottom: 4px solid #000;
 }
@@ -1021,6 +1021,23 @@ form.std .required_desc {
     background: #000;
     color: #fff;
 }
+
+
+#authors, #publishers {
+    -webkit-column-width: 200px;
+    -moz-column-width: 200px;
+    column-width: 200px;
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 30px;
+    -moz-column-gap: 30px;
+    column-gap: 30px;
+    -webkit-column-rule: 1px solid #ccc;
+    -moz-column-rule: 1px solid #ccc;
+    column-rule: 1px solid #ccc;
+}
+
 
 #search_block_top {
     height: 30px;

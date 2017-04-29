@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -24,8 +25,9 @@ public class AuthorService {
 
     public List<Author> getAllAuthors() {
         String url = constants.getBookServiceUrl() + "/author";
-        Author[] authors = restTemplate.getForObject(url, Author[].class);
-        return Arrays.asList(authors);
+        List<Author> authors = Arrays.asList(restTemplate.getForObject(url, Author[].class));
+        Collections.sort(authors);
+        return authors;
     }
 
     public Author getById(int id) {

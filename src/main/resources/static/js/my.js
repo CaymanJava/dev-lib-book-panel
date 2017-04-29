@@ -65,7 +65,11 @@ var book = function (additionalClass, id, name, image, description, authors, pub
 
 
 var author = function (id, name) {
-    return '<a href=author?id=' + id + '>' + name + '</a>'
+    return '<a href=author?id=' + id + '>' + name + '</a>';
+};
+
+var publisher = function(id, name) {
+    return '<a href=publisher?id=' + id + '>' + name + '</a>';
 };
 
 var prepareLastBook = function (id, name, image, description, fileLink, downloadMessage) {
@@ -138,6 +142,22 @@ function initCategories(categories) {
         var id = categories[i].id;
         var name = categories[i].name;
         $("#category-list").append(category(id, name));
+    }
+}
+
+function initAuthors(authors) {
+    for (i = 0; i < authors.length; i++) {
+        var id = authors[i].id;
+        var name = authors[i].name;
+        $("#authors").append('<p>' + author(id, name) + '</p>');
+    }
+}
+
+function initPublishers(publishers) {
+    for (i = 0; i < publishers.length; i++) {
+        var id = publishers[i].id;
+        var name = publishers[i].name;
+        $("#publishers").append('<p>' + publisher(id, name) + '</p>');
     }
 }
 
