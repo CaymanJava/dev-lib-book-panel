@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
@@ -30,12 +31,13 @@ public class CommonController {
     private final UserService userService;
     private final CustomSecurityService securityService;
     private final MessageSource messageSource;
+    private final ContactService contactService;
 
     @Autowired
     public CommonController(AuthorService authorService, BookService bookService,
                             CategoryService categoryService, PublisherService publisherService,
                             UserService userService, CustomSecurityService securityService,
-                            MessageSource messageSource) {
+                            MessageSource messageSource, ContactService contactService) {
         this.authorService = authorService;
         this.bookService = bookService;
         this.categoryService = categoryService;
@@ -43,6 +45,7 @@ public class CommonController {
         this.userService = userService;
         this.securityService = securityService;
         this.messageSource = messageSource;
+        this.contactService = contactService;
     }
 
 
@@ -137,11 +140,12 @@ public class CommonController {
 
     @RequestMapping(value="contact", method = RequestMethod.POST)
     public @ResponseBody Boolean sendMessage(@RequestParam("email") String email,
-                                              @RequestParam("message") String message) {
-        //TODO
-        log.info("Email: " + email);
-        log.info("Message: " + message);
-        return true;
+                                             @RequestParam("message") String message,
+                                             @RequestParam("recaptcha") String recaptcha,
+                                             HttpServletRequest request) {
+        String ip = request.getRemoteAddr();
+        log.info("Receive message: " + message + " and email: " + email + " from ip: " + ip);
+        return contactService.sendMessage(email, message, ip, recaptcha);
     }
 
     @RequestMapping(value = "category", method = RequestMethod.GET)

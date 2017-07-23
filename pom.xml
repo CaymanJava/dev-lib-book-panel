@@ -6,7 +6,7 @@
 
     <groupId>dev-lib-book-panel</groupId>
     <artifactId>dev-lib-book-panel</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
 
     <name>book-panel</name>
     <description>book-panel</description>

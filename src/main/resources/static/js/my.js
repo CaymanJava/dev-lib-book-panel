@@ -391,16 +391,27 @@ $('#change_user').click(function () {
     }
 });
 
+function checkCaptcha(recaptcha) {
+    if (recaptcha == null || recaptcha.length == 0) {
+        notifyAlert('Captcha can not be blank.');
+        return false;
+    } else {
+        return true;
+    }
+}
+
 $('#submitMessage').click(function() {
     var email = $('#email').val();
     var message = $('#message').val();
     var emailCorrect = checkEmail(email);
+    var recaptcha = grecaptcha.getResponse();
+    var recaptchaSolve = checkCaptcha(recaptcha);
 
-    if (emailCorrect) {
+    if (emailCorrect && recaptchaSolve) {
         $.ajax({
             type: "POST",
             url: "contact",
-            data: {email:email, message:message},
+            data: {email:email, message:message, recaptcha:recaptcha},
             success: function (response) {
                 if (response) {
                     $('#message_form').attr('class', 'hidden')

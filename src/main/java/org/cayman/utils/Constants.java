@@ -14,9 +14,15 @@ public class Constants {
     @Value("${file.service.url}")
     private String fileServiceUrl;
 
+    @Value("${mail.service.url}")
+    private String mailServiceUrl;
+
     @Value("${books.in.chunk}")
     private int booksInChunk;
 
     @Value("${last.books.count}")
     private int lastBooksCount;
+
+    @Value("${recaptcha.key}")
+    private String recaptchaKey;
 }

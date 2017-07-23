@@ -29,7 +29,12 @@ public class LoggedUser extends org.springframework.security.core.userdetails.Us
     }
 
     public static int id() {
-        return get().user.getId();
+        try {
+            return get().user.getId();
+        } catch (Exception e) {
+            // NullPointerException is a normal situation, if user doesn't login.
+            return 0;
+        }
     }
 
     @Override
